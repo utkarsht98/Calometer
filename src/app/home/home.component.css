@@ -1,0 +1,21 @@
+.button-container {
+    margin-right: 12px;
+}
+
+.error-container {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-container {
+    position: relative;
+    top: 24px;
+    right: 128px;
+    z-index: 999;
+}
+
+.logout-container {
+    border: none;
+    background: none;
+    margin-right: 28px;
+}

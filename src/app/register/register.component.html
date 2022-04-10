@@ -1,0 +1,36 @@
+<div class="container-register">
+    <div class="register-card">
+        <h5 class="register-heading">Please Register Yourself!!</h5>
+        <div class="p-fluid p-grid">
+            <div class="form-container field col-12 md:col-12">
+                <span class=" p-float-label">
+                  <input type="text" id="email" pInputText [(ngModel)]="value1" />
+                  <label for="email">Enter your email</label>
+                </span>
+            </div>
+            <div class="form-container field col-12 md:col-12">
+              <span class="p-float-label">
+                <input type="text" id="username" pInputText [(ngModel)]="value1" />
+                <label for="username">Create a username</label>
+              </span>
+            </div>
+            
+            <div class="form-container field col-12 md:col-12">
+                <span class="p-float-label">
+                  <p-password inputId="password" [(ngModel)]="value1" [feedback]="false" [toggleMask]="true"></p-password>
+                  <label for="password">Create a password</label>
+                </span>
+            </div>
+            <div class="form-container field col-12 md:col-12">
+                <span class="p-float-label">
+                  <p-inputNumber inputId="calories" [(ngModel)]="value2"></p-inputNumber>
+                  <label for="calories">Set your calories</label>
+                </span>
+            </div>
+        </div>
+        <div class="button-container field col-12 md:col-12">
+            <button style="width:144px" pButton [routerLink]="'/home'" pRipple label="Sign Up" class="p-button-raised">
+            </button>
+        </div>
+    </div>
+</div>
