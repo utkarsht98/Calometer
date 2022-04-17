@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   currentUser: LoginResponse = new LoginResponse();
   credError: string = "";
 
-  constructor(private primengConfig: PrimeNGConfig, private loginService: AuthService, private router:Router, private messageService: MessageService) { 
+  constructor(private primengConfig: PrimeNGConfig, private authService: AuthService, private router:Router, private messageService: MessageService) { 
     this.userCred = new LoginRequest();
     this.userData = new LoginResponse();
   }
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   validateUser(form:NgForm){
-    this.loginService.validateCredentials(this.userCred).subscribe((res) => {
+    this.authService.validateCredentials(this.userCred).subscribe((res) => {
       if (res.status === 200) {
         this.userData = res.body;
         localStorage.setItem('userData',JSON.stringify(this.userData));

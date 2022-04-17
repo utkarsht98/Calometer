@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
     }];
 
     this.currentUser = JSON.parse(localStorage.getItem('userData') || '{}');
-    console.log('current---', this.currentUser);
 
     if (Object.keys(this.currentUser).length == 0) {
       this.router.navigate(['/']);
@@ -47,11 +46,9 @@ export class HomeComponent implements OnInit {
   }
 
   retrieveMeals() {
-    console.log('enter here---');
     this.username = this.currentUser.username || '{}';
     this.userSevrice.getMeals(this.username).subscribe((res) => {
       this.meals = res;
-      console.log('meals---', this.meals);
     }, (error) => {
       console.log('error-----',error.message);
       this.emptyMeals=error.message

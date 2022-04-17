@@ -14,6 +14,10 @@ def create_user():
         _password = _params['password']
         _calorie_settings = _params['calorie_settings']
         
+
+        checkEmailId = "SELECT id FROM user WHERE email_id=%s"
+        checkUsername = "SELECT id FROM user WHERE username = %s"
+
         # insert record in database
         userQuery = "INSERT INTO user(username, email_id, password, calorie_settings) VALUES(%s, %s, %s, %s)"
         data = (_username, _email_id, _password, _calorie_settings)
@@ -21,11 +25,27 @@ def create_user():
         conn = mysql_instance.connect()
         cursor = conn.cursor()
 
+        cursor.execute(checkEmailId, (_email_id))
+        row = cursor.fetchone()
+
+        if row != None:
+            res = jsonify("User Already Registered!!")
+            res.status = 404
+            return res
+
+        cursor.execute(checkUsername, (_username))
+        row = cursor.fetchone()
+
+        if row != None:
+            res = jsonify("Username Already Present!!")
+            res.status = 404
+            return res
+
         cursor.execute(userQuery, data)
         conn.commit()
 
         res = jsonify('User created successfully.')
-        res.status_code = 200
+        res.status = 200
         return res
 
     except Exception as e:
@@ -153,7 +173,7 @@ def get_meals(username):
 
         # print('rows---',rows)
         if len(rows) == 0:
-            res = jsonify("Sorry!!No meal added by you!!")
+            res = jsonify("Sorry!! No meals added by you!!")
             res.status = 404
         else:
             res = jsonify(rows)

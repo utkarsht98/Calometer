@@ -3,6 +3,7 @@ import {environment as env} from '../../environments/environment'
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import { LoginRequest } from '../models/loginRequest';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Register } from '../models/register';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,12 @@ export class AuthService {
            JSON.stringify(userLogin), {headers: this.headers, observe: 'response'}).pipe(
              catchError((error: HttpErrorResponse) => this.handleError(error))
              );
+  }
+
+  addUser(userReg: Register): Observable<any> {
+    return this.client.post<any>(env.apiAddress + '/addUser', 
+    JSON.stringify(userReg), {headers: this.headers, observe: 'response'}).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)));
   }
 
   private handleError(err: HttpErrorResponse){
